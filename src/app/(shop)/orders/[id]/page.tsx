@@ -21,14 +21,12 @@ interface Props {
 }
 
 
-export default function Order( { params }: Props ) {
+export default function OrderByIdPage( { params }: Props ) {
 
   const { id } = params;
 
   // Todo: verificar
   // redirect(/)
-
-
 
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
@@ -36,7 +34,6 @@ export default function Order( { params }: Props ) {
       <div className="flex flex-col w-[1000px]">
 
         <Title title={ `Orden #${ id }` } />
-
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
 
@@ -56,8 +53,6 @@ export default function Order( { params }: Props ) {
               {/* <span className="mx-2">Pendiente de pago</span> */ }
               <span className="mx-2">Pagada</span>
             </div>
-
-
 
             {/* Items */ }
             {
@@ -89,9 +84,6 @@ export default function Order( { params }: Props ) {
             }
           </div>
 
-
-
-
           {/* Checkout - Resumen de orden */ }
           <div className="bg-white rounded-xl shadow-xl p-7">
 
@@ -109,7 +101,6 @@ export default function Order( { params }: Props ) {
             {/* Divider */ }
             <div className="w-full h-0.5 rounded bg-gray-200 mb-10" />
 
-
             <h2 className="text-2xl mb-2">Resumen de orden</h2>
 
             <div className="grid grid-cols-2">
@@ -125,7 +116,6 @@ export default function Order( { params }: Props ) {
 
               <span className="mt-5 text-2xl">Total:</span>
               <span className="mt-5 text-2xl text-right">$ 100</span>
-
 
             </div>
 
@@ -147,17 +137,11 @@ export default function Order( { params }: Props ) {
 
             </div>
 
-
           </div>
-
-
 
         </div>
 
-
-
       </div>
-
 
     </div>
   );

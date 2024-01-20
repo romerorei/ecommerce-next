@@ -1,7 +1,7 @@
 import { titleFont } from '@/config/fonts';
 import Link from 'next/link';
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <div className="flex flex-col rounded p-3 my-32 sm:my-52 bg-white">
 

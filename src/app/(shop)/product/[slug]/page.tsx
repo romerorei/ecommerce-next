@@ -1,13 +1,17 @@
-import { notFound } from 'next/navigation';
+export const revalidate = 10080; // 7 dias mas o menos
 
-import { initialData } from '@/seed/seed';
+import { notFound } from 'next/navigation';
 import { titleFont } from '@/config/fonts';
 import {
-          ProductMobileSlideshow,
-          ProductSlideshow,
-          QuantitySelector,
-          SizeSelector
-        } from '@/components';
+    ProductMobileSlideshow,
+    ProductSlideshow,
+    QuantitySelector,
+    SizeSelector,
+    StockLabel
+  } from '@/components';
+import { getProductBySlug } from '@/actions';
+import { Metadata, ResolvingMetadata } from 'next';
+
 
 interface Props {
   params: {
@@ -17,15 +21,37 @@ interface Props {
 
 
 
-export default function ProductDetail ( { params }: Props ) {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug
+
+  const product = await getProductBySlug(slug)
+
+  // optionally access and extend (rather than replace) parent metadata
+  //const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: product?.title,
+    description: product?.description,
+    openGraph: {
+      title: product?.title,
+      description: product?.description,
+      images: [`/products/${product?.images[1]}`],
+    },
+  }
+}
+
+export default async function ProductBySlugPage( { params }: Props ) {
 
   const { slug } = params;
-  const product = initialData.products.find( product => product.slug === slug );
+  const product = await getProductBySlug(slug);
 
   if ( !product ) {
     notFound();
   }
-
 
 
   return (
@@ -48,11 +74,13 @@ export default function ProductDetail ( { params }: Props ) {
           className="hidden md:block"
         />
 
-
       </div>
 
       {/* Detalles */ }
       <div className="col-span-1 px-5">
+
+
+        <StockLabel slug={ product.slug }/>
 
         <h1 className={ ` ${ titleFont.className } antialiased font-bold text-xl` }>
           { product.title }
@@ -65,13 +93,10 @@ export default function ProductDetail ( { params }: Props ) {
           availableSizes={ product.sizes }
         />
 
-
-
         {/* Selector de Cantidad */ }
         <QuantitySelector
           quantity={ 2 }
         />
-
 
         {/* Button */ }
         <button className="btn-primary my-5">
