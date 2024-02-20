@@ -61,8 +61,9 @@ const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   const onSubmit = async( data: FormInputs ) => {
     //console.log({data});
 
-    setAddress(data);
     const {rememberAddress, ...restAddress} = data;
+    //console.log({restAddress});
+    setAddress(restAddress);
 
     if (rememberAddress) {
       // Todo: server action
