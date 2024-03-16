@@ -47,6 +47,7 @@ export const getPaginatedProductsWithImages = async ({
     const totalPages = Math.ceil(totalCount / take);
 
     return {
+      ok: true,
       currentPage: page,
       totalPages: totalPages,
       products: products.map((product) => ({

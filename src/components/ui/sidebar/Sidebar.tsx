@@ -9,7 +9,6 @@ import { logout } from '@/actions';
 import { useSession } from 'next-auth/react';
 
 
-
 export const Sidebar = () => {
 
   const isSideMenuOpen = useUIStore( state => state.isSideMenuOpen );
@@ -92,7 +91,7 @@ export const Sidebar = () => {
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoTicketOutline size={ 30 } />
-              <span className="ml-3 text-xl">Ordenes</span>
+              <span className="ml-3 text-xl">Mis Ordenes</span>
             </Link>
           </>
         )}
@@ -124,10 +123,6 @@ export const Sidebar = () => {
           )
         }
 
-
-
-
-
         {/* Line Separator */ }
        {
         isAdmin && (
@@ -135,7 +130,8 @@ export const Sidebar = () => {
             <div className="w-full h-px bg-gray-200 my-10" />
 
             <Link
-              href="/"
+              href="/admin/products"
+              onClick={ () => closeMenu() }
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoShirtOutline size={ 30 } />
@@ -143,7 +139,8 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/"
+              href="/admin/orders"
+              onClick={ () => closeMenu() }
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoTicketOutline size={ 30 } />
@@ -151,7 +148,8 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/"
+              href="/admin/users"
+              onClick={ () => closeMenu() }
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoPeopleOutline size={ 30 } />
